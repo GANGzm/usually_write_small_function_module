@@ -75,7 +75,7 @@ static int remove_directory(const char *pathname)
 	return 0;
 }
 
-static inline int creat_new_directory(const char *pathname)
+static inline int creat_new_directory(const char *pathname, mode_t mode)
 {
 	int ret;
 	
@@ -86,7 +86,7 @@ static inline int creat_new_directory(const char *pathname)
 		}
 	}
 
-	ret = mkdir(pathname, 0775);
+	ret = mkdir(pathname, mode);
 	if(ret != 0) {
 		return -2;
 	}
@@ -103,7 +103,7 @@ int main(int argc, const char *argv[])
 		return -1;
 	}
 
-	ret = creat_new_directory(argv[1]);
+	ret = creat_new_directory(argv[1], 0775);
 	if(ret != 0) {
 		printf("creat new directory fail. ret=%d \n", ret);
 		return -2;
